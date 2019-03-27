@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace DeleteThumbsdb
@@ -14,6 +10,8 @@ namespace DeleteThumbsdb
         static void Main(string[] args)
         {
             DeleteFiles(stdir);
+            Console.WriteLine("何かキーを押してください…");
+            Console.ReadKey();
         }
 
         static void DeleteFiles(string dir)
@@ -25,8 +23,18 @@ namespace DeleteThumbsdb
             {
                 if (s.EndsWith("Thumbs.db"))
                 {
-                    Console.WriteLine(s);
-                    File.Delete(s);
+                    try
+                    {
+                        Console.WriteLine(s);
+                        File.Delete(s);
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("削除失敗 -----------------------------------------------");
+                        Console.WriteLine(s);
+                        Console.WriteLine(e.ToString());
+                        Console.WriteLine("--------------------------------------------------------");
+                    }
                 }
             }
 
